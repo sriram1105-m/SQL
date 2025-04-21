@@ -1,0 +1,35 @@
+select * from sales
+where amount > 2000 and boxes < 100;
+
+select p.Salesperson, count(*) as 'Shipment count'
+from sales as s
+join people as p on s.spid = p.spid
+where saledate between '2022-01-01' and '2022-01-31'
+group by p.Salesperson;
+
+select pr.product, sum(boxes) as 'Total Boxes'
+from sales s
+join products pr on s.pid = pr.pid
+where pr.Product in ('Milk Bars', 'Eclairs')
+group by pr.product;
+
+select pr.product, sum(boxes) as 'Total Boxes'
+from sales s
+join products pr on s.pid = pr.pid
+where pr.Product in ('Milk Bars', 'Eclairs')
+and s.saledate between '2022-02-01' and '2022-02-07'
+group by pr.product;
+
+select * from sales
+where customers < 100 and boxes < 100;
+select *,
+case when weekday(saledate = 2) then 'Wednesday Shipment'
+else
+end as 'W SHipment'
+from sales
+where customers < 100 and boxes < 100 
+
+select distinct p.Salesperson
+from sales s
+join people p on p.spid = s.spid
+where s.SaleDate between '2022-01-01' and '2022-01-07'
