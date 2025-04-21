@@ -1,0 +1,41 @@
+select s.SaleDate, s.Amount, p.Salesperson
+from sales as s
+join people as p on p.SPID = s.SPID;
+
+select s.saleDate, s.Amount, p.Salesperson, p.SPID, s.SPID
+from sales as s
+join people as p on p.SPID = s.SPID;
+
+select s.SaleDate, s.amount, pr.product
+from sales as s
+left join products as pr on pr.pid = s.pid;
+
+select s.saleDate, s.amount, p.Salesperson, pr.product, p.team
+from sales as s
+join people as p on p.SPID = s.SPID
+join products as pr on pr.PID = s.PID;
+
+select s.saleDate, s.amount, p.Salesperson, pr.product, p.team
+from sales as s
+join people as p on p.SPID = s.SPID
+join products as pr on pr.PID = s.PID
+where s.amount < 500
+and p.team = 'Delish';
+
+
+select s.saleDate, s.amount, p.Salesperson, pr.product, p.team
+from sales as s
+join people as p on p.SPID = s.SPID
+join products as pr on pr.PID = s.PID
+where s.amount < 500
+and p.team = '';
+
+select s.saleDate, s.amount, p.Salesperson, pr.product, p.team
+from sales as s
+join people as p on p.SPID = s.SPID
+join products as pr on pr.PID = s.PID
+join geo as g on g.GeoID = s.GeoID
+where s.amount < 500
+and p.team = ''
+and g.Geo in ('New Zealand', 'India')
+order by saleDate
